@@ -24,19 +24,37 @@ struct ContentView: View {
             NavigationView {
                 List(viewModel.items) { item in
                     VStack(alignment: .leading) {
-                        Text("\(item.modelYear) " + item.carMake)
-                            .font(.headline)
-                        Text(item.carModel)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                        HStack() {
+                            VStack(alignment: .leading) {
+                                Text("\(item.modelYear) " + item.carMake)
+                                    .font(.headline)
+                                Text(item.carModel)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+
+                            }
+                            Spacer()
+                            Image(systemName: "fuelpump")
+                                .padding(5)
+                            Image(systemName: "wrench.and.screwdriver")
+                                .padding(5)
+                            Image(systemName: "pencil")
+                        }
                     }
+
                 }
                 .navigationTitle("My Cars")
                 .onAppear {
                     viewModel.fetchItems()
                 }
             }
-            .padding(5)
+            .background() {
+                Rectangle()
+                    .foregroundStyle(Color.red)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .shadow(radius: 15)
+            }
+            .padding()
             Button("Show Alert") {
                 showingAlert = true
             }
@@ -56,7 +74,6 @@ struct ContentView: View {
                 exit(0)
             }
         }
-        .padding()
     }
 }
 

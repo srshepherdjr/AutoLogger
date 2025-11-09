@@ -11,6 +11,7 @@ struct AutoMaintView: View {
     
     @State private var showingAlert = false
     @State private var selectedTab = "gaslist"
+    @State private var path = NavigationPath()
     
 //    @StateObject var mycarModel = MyCarModel()
     let car: AutoCar
@@ -24,11 +25,10 @@ struct AutoMaintView: View {
                 Text(car.carModel)
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                
                 }
         }
         TabView(selection: $selectedTab) {
-            Text("Gas list")
+            CarGasView(car: car)
                 .tabItem {
                     Label("One", systemImage: "fuelpump")
                 }
@@ -44,35 +44,6 @@ struct AutoMaintView: View {
                 }
                 .tag("editcardetails")
         }
-
-        
-//            //            HStack {
-////                Image(systemName: "fuelpump")
-////                    .padding(5)
-////                Image(systemName: "wrench.and.screwdriver")
-////                    .padding(5)
-////                Image(systemName: "pencil")
-////
-////            }
-//
-//            .padding()
-//            Button("Show Alert") {
-//                showingAlert = true
-//            }
-//            .alert("Important Message", isPresented: $showingAlert) {
-//                Button("OK") {
-//                    // Handle OK button tap
-//                    print("OK tapped")
-//                }
-//                Button("Cancel", role: .cancel) {
-//                    // Handle Cancel button tap
-//                    print("Cancel tapped")
-//                }
-//            } message: {
-//                Text("Please read this message carefully.")
-//            }
-//        }
-
     }
 }
 

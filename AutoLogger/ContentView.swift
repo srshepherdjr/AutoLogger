@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State private var showingAlert = false
     @StateObject var viewModel = MyViewModel()
+    @State private var path = NavigationPath()
     
     var body: some View {
         VStack {
@@ -21,43 +22,17 @@ struct ContentView: View {
 
             .padding(5)
             Text("Maintenance Logger")
-            NavigationStack {
+            NavigationStack(path: $path) {
                 List(viewModel.items) { item in
                     NavigationLink("\(item.modelYear)" + " " + item.carMake + " " + item.carModel, value: item)
-//                    { AutoMaintView(car:item) }
-//                    label: {
-//                            VStack() {
-//                             Text("\(item.modelYear)" + " " + item.carMake )
-//                                Text(item.carModel)
-//                            }
-//                        }
                 }
                 .navigationDestination(for: AutoCar.self) { item in
                     AutoMaintView(car: item)
                 }
             }
-//            NavigationView {
-//                List(viewModel.items) { item in
-//                        VStack(alignment: .leading) {
-//                            HStack() {
-//                                VStack(alignment: .leading) {
-//                                    Text("\(item.modelYear) " + item.carMake)
-//                                        .font(.headline)
-//                                    Text(item.carModel)
-//                                        .font(.subheadline)
-//                                        .foregroundColor(.gray)
-//                                }
-//                                Spacer()
-//
-//                            }
-//                        }
-//                }
-//                .navigationTitle("My Cars")
-//
                 .onAppear {
                     viewModel.fetchItems()
                 }
-//            }
             .background() {
                 Rectangle()
                     .foregroundStyle(Color.red)

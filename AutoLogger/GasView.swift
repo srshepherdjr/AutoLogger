@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GasView: View {
-    @StateObject var viewModel = MyViewModel()
+    @State var viewModel = MyViewModel()
     @State private var path = NavigationPath()
     let gas: AutoCarGas
     let car: AutoCar

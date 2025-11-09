@@ -28,21 +28,28 @@ struct AutoMaintView: View {
                 }
         }
         TabView(selection: $selectedTab) {
-            CarGasView(car: car)
-                .tabItem {
-                    Label("One", systemImage: "fuelpump")
-                }
-                .tag("gaslist")
-            Text("Maintenance log")
-                .tabItem {
-                    Label("Two", systemImage: "wrench.and.screwdriver")
-                }
-                .tag("maintenancelog")
-            Text("Edit car details")
-                .tabItem {
-                    Label("Three", systemImage: "pencil")
-                }
-                .tag("editcardetails")
+            NavigationStack {
+                CarGasView(car: car)
+                    .tabItem {
+                        Label("One", systemImage: "fuelpump")
+                    }
+                    .tag("gaslist")
+            }
+            NavigationStack {
+                Text("Maintenance log")
+                    .tabItem {
+                        Label("Two", systemImage: "wrench.and.screwdriver")
+                    }
+                    .tag("maintenancelog")
+
+            }
+            NavigationStack {
+                Text("Edit car details")
+                    .tabItem {
+                        Label("Three", systemImage: "pencil")
+                    }
+                    .tag("editcardetails")
+            }
         }
     }
 }

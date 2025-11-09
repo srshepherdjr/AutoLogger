@@ -3,8 +3,10 @@ internal import Combine
 class MyViewModel: ObservableObject {
     @Published var items: [AutoCar] = []
     @Published var gasList: [AutoCarGas] = []
+    @Published var selectedCar: AutoCar?
+    @Published var selectedCarGas: AutoCarGas?
+    @Published var isShowingDetails: Bool = false
     
-  
     func fetchItems() {
         guard let     url = URL(string: "https://srshepherdjr.ddns.net:8888/api/v1/mycars/findActiveCars") else { return }
 

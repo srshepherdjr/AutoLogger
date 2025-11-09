@@ -8,30 +8,31 @@ import SwiftUI
 import Foundation
 
 struct CarGasView: View {
-    @StateObject var viewModel = MyViewModel()
+    @StateObject private var viewModel = MyViewModel()
+//    @Environment(MyViewModel.self) var viewModel: MyViewModel
 //    @State private var path = NavigationPath()
     let car: AutoCar
-
+    var selected: AutoCarGas?
+    
     var body: some View {
-//        NavigationStack() {
             List(viewModel.gasList) { item in
-                NavigationLink{
-                } label: {
-                    HStack {
-                        Text ( item.cargasdate )
-                        //.formatted(date: .short, time: .omitted)
-                        Spacer()
-                        Text ("\(item.cargals, format: .number.precision(.fractionLength(2))) gal")
-                        Text ("@ " + (item.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00"))
-                        
-                    }
-                }
+                    CarGasRowView(item: item)
             }
-            .onAppear {
-                viewModel.fetchCarGasItems(id: car.id)
-            }
-//            .navigationDestination(for: AutoCarGas.self) { item in
-//                GasView(gas: item, car: car)
+//        VStack {
+//            List(viewModel.gasList) { item in
+//                    CarGasRowView(item: item)
+//                HStack {
+//                    Text ( item.cargasdate )
+//                    Spacer()
+//                    Text ("\(item.cargals, format: .number.precision(.fractionLength(2))) gal")
+//                    Text ("@ " + (item.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00"))
+//                }
+//            }
+//            .onAppear {
+//                viewModel.fetchCarGasItems(id: car.id)
+//            }
+//            .sheet(isPresented: $viewModel.isShowingDetails) {
+//                GasView(gas: viewModel.selectedCarGas!, car: car)
 //            }
 //        }
 

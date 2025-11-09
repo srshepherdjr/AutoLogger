@@ -29,6 +29,9 @@ struct ContentView: View {
                 .navigationDestination(for: AutoCar.self) { item in
                     AutoMaintView(car: item)
                 }
+//                .navigationDestination(for: AutoCarGas.self) { item in
+//                    GasView(gas: gas, car: item)
+//                }
             }
                 .onAppear {
                     viewModel.fetchItems()

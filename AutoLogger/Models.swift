@@ -5,7 +5,7 @@
 //  Created by Steven Shepherd on 11/7/25.
 //
 
-struct AutoCar: Codable, Identifiable {
+struct AutoCar: Codable, Identifiable, Hashable {
     let id: Int
     let userId: Int
     let modelYear: Int

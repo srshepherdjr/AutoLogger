@@ -21,33 +21,43 @@ struct ContentView: View {
 
             .padding(5)
             Text("Maintenance Logger")
-            NavigationView {
+            NavigationStack {
                 List(viewModel.items) { item in
-                    VStack(alignment: .leading) {
-                        HStack() {
-                            VStack(alignment: .leading) {
-                                Text("\(item.modelYear) " + item.carMake)
-                                    .font(.headline)
-                                Text(item.carModel)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-
-                            }
-                            Spacer()
-                            Image(systemName: "fuelpump")
-                                .padding(5)
-                            Image(systemName: "wrench.and.screwdriver")
-                                .padding(5)
-                            Image(systemName: "pencil")
-                        }
-                    }
-
+                    NavigationLink("\(item.modelYear)" + " " + item.carMake + " " + item.carModel, value: item)
+//                    { AutoMaintView(car:item) }
+//                    label: {
+//                            VStack() {
+//                             Text("\(item.modelYear)" + " " + item.carMake )
+//                                Text(item.carModel)
+//                            }
+//                        }
                 }
-                .navigationTitle("My Cars")
+                .navigationDestination(for: AutoCar.self) { item in
+                    AutoMaintView(car: item)
+                }
+            }
+//            NavigationView {
+//                List(viewModel.items) { item in
+//                        VStack(alignment: .leading) {
+//                            HStack() {
+//                                VStack(alignment: .leading) {
+//                                    Text("\(item.modelYear) " + item.carMake)
+//                                        .font(.headline)
+//                                    Text(item.carModel)
+//                                        .font(.subheadline)
+//                                        .foregroundColor(.gray)
+//                                }
+//                                Spacer()
+//
+//                            }
+//                        }
+//                }
+//                .navigationTitle("My Cars")
+//
                 .onAppear {
                     viewModel.fetchItems()
                 }
-            }
+//            }
             .background() {
                 Rectangle()
                     .foregroundStyle(Color.red)

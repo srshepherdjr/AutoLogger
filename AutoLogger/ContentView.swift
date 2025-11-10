@@ -16,13 +16,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-                .padding(10)
-
-            .padding(5)
-            Text("Maintenance Logger")
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//                .padding(10)
+//
+//            .padding(5)
+            Text("Auto Logger")
             NavigationStack(path: $path) {
                 List(viewModel.items) { item in
                     NavigationLink("\(item.modelYear)" + " " + item.carMake + " " + item.carModel, value: item)
@@ -30,9 +30,7 @@ struct ContentView: View {
                 .navigationDestination(for: AutoCar.self) { item in
                     AutoMaintView(car: item)
                 }
-//                .navigationDestination(for: AutoCarGas.self) { item in
-//                    GasView(gas: gas, car: item)
-//                }
+
             }
                 .onAppear {
                     viewModel.fetchItems()

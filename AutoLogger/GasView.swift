@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct GasView: View {
-    @State var viewModel = MyViewModel()
+    @EnvironmentObject var viewModel: MyViewModel
+    @Environment(\.dismiss) private var dismiss // moved dismiss functionality here
+
     @State private var path = NavigationPath()
     let gas: AutoCarGas
     let car: AutoCar
-//    @State private var path: NavigationPath()
-    
+  
     var body: some View {
-        Text("Hello, World!")
         Text("\(car.modelYear) " + car.carMake + " " + car.carModel)
         Form {
             HStack {
@@ -57,10 +57,10 @@ struct GasView: View {
             HStack {
                 Spacer()
                 Button("Save") {
-                    
+                    dismiss()
                 }
                 Button("Back") {
-                    
+                    dismiss()
                 }
             }
         }

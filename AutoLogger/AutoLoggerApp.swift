@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AutoLoggerApp: App {
+    @StateObject var servicesAPI = MyViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(servicesAPI)
         }
     }
 }

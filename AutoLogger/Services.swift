@@ -6,6 +6,7 @@ class MyViewModel: ObservableObject {
     @Published var selectedCar: AutoCar?
     @Published var selectedCarGas: AutoCarGas?
     @Published var isShowingDetails: Bool = false
+    @Published var isNewCarGas: Bool = false
     
     func fetchItems() {
         guard let     url = URL(string: "https://srshepherdjr.ddns.net:8888/api/v1/mycars/findActiveCars") else { return }

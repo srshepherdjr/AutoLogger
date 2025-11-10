@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var showingAlert = false
-    @StateObject var viewModel = MyViewModel()
+    @EnvironmentObject var viewModel: MyViewModel
+    
     @State private var path = NavigationPath()
     
     var body: some View {

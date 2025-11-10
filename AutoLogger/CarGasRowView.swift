@@ -8,9 +8,7 @@ import SwiftUI
 import Foundation
 
 struct CarGasRowView: View {
-//    @StateObject var viewModel = MyViewModel()
-    //@Environment(MyViewModel.self)
-    @StateObject var vm = MyViewModel()
+    @EnvironmentObject var vm: MyViewModel
     let item: AutoCarGas
 
     var body: some View {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AutoMaintView: View {
     
+    @EnvironmentObject var viewModel: MyViewModel
     @State private var showingAlert = false
     @State private var selectedTab = "gaslist"
     @State private var path = NavigationPath()
@@ -17,38 +18,33 @@ struct AutoMaintView: View {
     let car: AutoCar
     
     var body: some View {
-        VStack {
-            Text("Maintenance Logger")
-            VStack {
-                Text("\(car.modelYear) " + car.carMake)
-                    .font(.headline)
-                Text(car.carModel)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                }
-        }
         TabView(selection: $selectedTab) {
-            NavigationStack {
-                CarGasView(car: car)
-                    .tabItem {
-                        Label("One", systemImage: "fuelpump")
-                    }
-                    .tag("gaslist")
-            }
-            NavigationStack {
-                Text("Maintenance log")
-                    .tabItem {
-                        Label("Two", systemImage: "wrench.and.screwdriver")
-                    }
-                    .tag("maintenancelog")
+            CarGasView(car: car)
+                .tabItem {
+                    Label("Fuel", systemImage: "fuelpump")
+                }
+                .tag("gaslist")
+            Text("Maintenance log")
+                .tabItem {
+                    Label("Maint", systemImage: "wrench.and.screwdriver")
+                }
+                .tag("maintenancelog")
 
-            }
-            NavigationStack {
-                Text("Edit car details")
-                    .tabItem {
-                        Label("Three", systemImage: "pencil")
-                    }
-                    .tag("editcardetails")
+            Text("Edit car details")
+                .tabItem {
+                    Label("Edit", systemImage: "pencil")
+                }
+                .tag("editcardetails")
+        }
+        .navigationTitle("\(car.modelYear) " + car.carMake + " " + car.carModel)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    print("Child View button tapped!")
+                    viewModel.isNewCarGas.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
     }

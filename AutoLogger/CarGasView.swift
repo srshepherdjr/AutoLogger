@@ -8,8 +8,8 @@ import SwiftUI
 import Foundation
 
 struct CarGasView: View {
-    @StateObject private var viewModel = MyViewModel()
-//    @Environment(MyViewModel.self) var viewModel: MyViewModel
+//    @StateObject private var viewModel = MyViewModel()
+    @EnvironmentObject var viewModel: MyViewModel
 //    @State private var path = NavigationPath()
     let car: AutoCar
     var selected: AutoCarGas?
@@ -18,7 +18,16 @@ struct CarGasView: View {
             List(viewModel.gasList) { item in
                     CarGasRowView(item: item)
             }
-//        VStack {
+            .toolbar {
+                // Toolbar items go here
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Right") {
+                        // Action for the right button
+                    }
+                }
+            }
+
+        //        VStack {
 //            List(viewModel.gasList) { item in
 //                    CarGasRowView(item: item)
 //                HStack {
@@ -28,12 +37,16 @@ struct CarGasView: View {
 //                    Text ("@ " + (item.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00"))
 //                }
 //            }
-//            .onAppear {
-//                viewModel.fetchCarGasItems(id: car.id)
-//            }
-//            .sheet(isPresented: $viewModel.isShowingDetails) {
-//                GasView(gas: viewModel.selectedCarGas!, car: car)
-//            }
+            .onAppear {
+                viewModel.fetchCarGasItems(id: car.id)
+            }
+            .sheet(isPresented: $viewModel.isShowingDetails) {
+                GasView(gas: viewModel.selectedCarGas!, car: car)
+            }
+            .sheet(isPresented: $viewModel.isNewCarGas) {
+                let gas = AutoCarGas(id: -1, idmycar: car.id, cargasdate: "", carmilesstart: 0, carmilesend: 0, carmilesnet: 0, cargals: 0.0, cargasprice: 0.0)
+                GasView(gas: gas, car: car)
+            }
 //        }
 
    }

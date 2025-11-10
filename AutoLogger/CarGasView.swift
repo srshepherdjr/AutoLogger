@@ -16,7 +16,7 @@ struct CarGasView: View {
     
     var body: some View {
         List(viewModel.gasList) { item in
-                CarGasRowView(item: item)
+            CarGasRowView(item: item, selectedCar: car)
         }
         .toolbar {
             // Toolbar items go here
@@ -29,9 +29,9 @@ struct CarGasView: View {
         .onAppear {
             viewModel.fetchCarGasItems(id: car.id)
         }
-        .sheet(isPresented: $viewModel.isShowingDetails) {
-            GasView(gas: viewModel.selectedCarGas!, car: car)
-        }
+//        .sheet(isPresented: $viewModel.isShowingDetails) {
+//            GasView(gas: viewModel.selectedCarGas!, car: car)
+//        }
         .sheet(isPresented: $viewModel.isNewCarGas) {
             let gas = AutoCarGas(id: -1, idmycar: car.id, cargasdate: "", carmilesstart: 0, carmilesend: 0, carmilesnet: 0, cargals: 0.0, cargasprice: 0.0)
             GasView(gas: gas, car: car)

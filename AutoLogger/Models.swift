@@ -18,13 +18,13 @@ struct AutoCar: Codable, Identifiable, Hashable {
 
 struct AutoCarGas: Codable, Identifiable, Hashable {
     let id: Int
-    let idmycar: Int
-    let cargasdate: String
-    let carmilesstart: Int
-    let carmilesend: Int
-    let carmilesnet: Int
-    let cargals: Double
-    let cargasprice: Double?
+    var idmycar: Int
+    var cargasdate: String
+    var carmilesstart: Int
+    var carmilesend: Int
+    var carmilesnet: Int
+    var cargals: Double
+    var cargasprice: Double?
 }
 
 enum MLAPIErrors: Error {

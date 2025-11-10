@@ -32,7 +32,7 @@ struct AutoMaintView: View {
 
             Text("Edit car details")
                 .tabItem {
-                    Label("Edit", systemImage: "pencil")
+                    Label("Edit Car", systemImage: "pencil")
                 }
                 .tag("editcardetails")
         }

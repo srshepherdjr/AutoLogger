@@ -12,19 +12,29 @@ struct CarGasRowView: View {
     let item: AutoCarGas
 
     var body: some View {
-            HStack {
-                Text ( item.cargasdate )
-                //.formatted(date: .short, time: .omitted)
-                Spacer()
-                Text ("\(item.cargals, format: .number.precision(.fractionLength(2))) gal")
-                Text ("@ " + (item.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00"))
-                
+        HStack {
+            Text ( item.cargasdate )
+                .padding(5)
+            //.formatted(date: .short, time: .omitted)
+            Text ("\(item.cargals, format: .number.precision(.fractionLength(2))) gal")
+                .padding(5)
+            Text ("@ " + (item.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00"))
+                .padding(5)
+            Color.clear // Or any color, or a Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: .infinity) // Make it fill the available space
+                .contentShape(Rectangle()) // Ensures the entire area is tappable
+                .onTapGesture {
+                    vm.selectedCarGas = item
+                    vm.isShowingDetails.toggle()
+                    print("whitespace tapped; isShowingDetails: \(vm.isShowingDetails)")
+                    // Perform your desired action here
             }
-            .onTapGesture {
-                vm.selectedCarGas = item
-                vm.isShowingDetails.toggle()
-                print("row tapped; isShowingDetails: \(vm.isShowingDetails)")
-            }
+        }
+        .onTapGesture {
+            vm.selectedCarGas = item
+            vm.isShowingDetails.toggle()
+            print("row tapped; isShowingDetails: \(vm.isShowingDetails)")
+        }
    }
     func stringToDate(dateString: String, format: String) -> Date? {
         let dateFormatter = DateFormatter()

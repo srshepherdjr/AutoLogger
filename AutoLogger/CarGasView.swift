@@ -8,9 +8,7 @@ import SwiftUI
 import Foundation
 
 struct CarGasView: View {
-//    @StateObject private var viewModel = MyViewModel()
     @EnvironmentObject var viewModel: MyViewModel
-//    @State private var path = NavigationPath()
     let car: AutoCar
     var selected: AutoCarGas?
     

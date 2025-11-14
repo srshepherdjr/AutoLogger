@@ -51,13 +51,15 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Start miles", value: $gas.carmilesstart, formatter: Self.numberFormatter)
-//                            .keyboardType(.numberPad) // Suggests a numeric keyboard
-                            .border(Color.gray)
-                            .focused($focusField, equals: .startMiles)
+                        #if os(iOS)
+                            .keyboardType(.numberPad) // Suggests a numeric keyboard
+//                            .border(Color.gray)
+//                            .focused($focusField, equals: .startMiles)
                             .submitLabel(.next)
                             .onSubmit {
                                 focusField = .endMiles
                             }
+                        #endif
                     } else {
                         Text("\(gas.carmilesstart)")
                     }
@@ -67,13 +69,15 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("End miles", value: $gas.carmilesend, formatter: Self.numberFormatter)
-//                            .keyboardType(.numberPad) // Suggests a numeric keyboard
-                            .border(Color.gray)
-                            .focused($focusField, equals: .endMiles)
+                        #if os(iOS)
+                            .keyboardType(.numberPad) // Suggests a numeric keyboard
+//                            .border(Color.gray)
+//                            .focused($focusField, equals: .endMiles)
                             .submitLabel(.next)
                             .onSubmit {
                                 focusField = .netMiles
                             }
+                        #endif
                     } else {
                         Text("\(gas.carmilesend)")
                     }
@@ -83,13 +87,16 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Net miles", value: $gas.carmilesnet, formatter: Self.numberFormatter)
-//                            .keyboardType(.numberPad) // Suggests a numeric keyboard
-                            .border(Color.gray)
-                            .focused($focusField, equals: .netMiles)
+                        #if os(iOS)
+
+                            .keyboardType(.numberPad) // Suggests a numeric keyboard
+//                            .border(Color.gray)
+//                            .focused($focusField, equals: .netMiles)
                             .submitLabel(.next)
                             .onSubmit {
                                 focusField = .gallons
                             }
+                        #endif
                     } else {
                         Text("\(gas.carmilesnet)")
                     }
@@ -99,13 +106,15 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Gallons", value: $gas.cargals, formatter: Self.numberFormatter)
-//                            .keyboardType(.numberPad) // Suggests a numeric keyboard
-                            .border(Color.gray)
-                            .focused($focusField, equals: .gallons)
+                        #if os(iOS)
+                            .keyboardType(.numberPad) // Suggests a numeric keyboard
+//                            .border(Color.gray)
+//                            .focused($focusField, equals: .gallons)
                             .submitLabel(.next)
                             .onSubmit {
                                 focusField = .pricePerGallon
                             }
+                        #endif
                     } else {
                         Text(gas.cargals.formatted())
                     }
@@ -115,14 +124,16 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Price / gal", value: $gas.cargasprice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-//                            .keyboardType(.numberPad) // Suggests a numeric keyboard
-                            .border(Color.gray)
+                        #if os(iOS)
+                            .keyboardType(.numberPad) // Suggests a numeric keyboard
+//                            .border(Color.gray)
 //                            .focused($focusField, equals: .pricePerGallon)
                             .submitLabel(.done)
                             .onSubmit {
                                 focusField = nil
                                 SubmitForm()
                             }
+                    #endif
                     } else {
                         Text(gas.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00")
                     }

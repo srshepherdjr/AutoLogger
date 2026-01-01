@@ -53,4 +53,5 @@ struct AutoMaintView: View {
 #Preview {
     let carModel = AutoCar(id: 1, userId: 1, modelYear: 2020, carMake: "Toyota", carModel: "Camry", active: true)
     AutoMaintView(car: carModel)
+        .environmentObject(MyViewModel())
 }

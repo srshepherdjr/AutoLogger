@@ -31,6 +31,7 @@ struct GasView: View {
                     Text("ID")
                     Spacer()
                     Text("\(gas.id)")
+                        .frame(maxWidth: 50)
                 }
                 HStack {
                     Text("Date")
@@ -42,6 +43,8 @@ struct GasView: View {
                             .onSubmit {
                                 focusField = .startMiles
                             }
+                            .frame(maxWidth: 100)
+
                     } else {
                         Text(gas.cargasdate)
                     }
@@ -51,6 +54,7 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Start miles", value: $gas.carmilesstart, formatter: Self.numberFormatter)
+                            .frame(maxWidth: 75)
                         #if os(iOS)
                             .keyboardType(.numberPad) // Suggests a numeric keyboard
 //                            .border(Color.gray)
@@ -69,6 +73,8 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("End miles", value: $gas.carmilesend, formatter: Self.numberFormatter)
+                            .frame(maxWidth: 75)
+
                         #if os(iOS)
                             .keyboardType(.numberPad) // Suggests a numeric keyboard
 //                            .border(Color.gray)
@@ -87,6 +93,7 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Net miles", value: $gas.carmilesnet, formatter: Self.numberFormatter)
+                            .frame(maxWidth: 75)
                         #if os(iOS)
 
                             .keyboardType(.numberPad) // Suggests a numeric keyboard
@@ -106,6 +113,7 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Gallons", value: $gas.cargals, formatter: Self.numberFormatter)
+                            .frame(maxWidth: 75)
                         #if os(iOS)
                             .keyboardType(.numberPad) // Suggests a numeric keyboard
 //                            .border(Color.gray)
@@ -124,6 +132,8 @@ struct GasView: View {
                     Spacer()
                     if isEditing {
                         TextField("Price / gal", value: $gas.cargasprice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                            .frame(maxWidth: 75)
+
                         #if os(iOS)
                             .keyboardType(.numberPad) // Suggests a numeric keyboard
 //                            .border(Color.gray)
@@ -138,16 +148,17 @@ struct GasView: View {
                         Text(gas.cargasprice?.formatted(.currency(code: "USD")) ?? "0.00")
                     }
                 }
-//                Spacer()
-//                HStack {
-//                    Spacer()
-//                    Button("Save") {
-//                        dismiss()
-//                    }
-//                    Button("Back") {
-//                        dismiss()
-//                    }
-//                }
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button("Save") {
+                        viewModel.saveCarGasItem(carGas: gas)
+                        dismiss()
+                    }
+                    Button("Back") {
+                        dismiss()
+                    }
+                }
             }
         }
     }
@@ -156,7 +167,7 @@ struct GasView: View {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0 // For integers
+        formatter.maximumFractionDigits = 3 // For integers
         return formatter
     }()
     
@@ -166,7 +177,8 @@ struct GasView: View {
 }
 
 #Preview {
-    let gas = AutoCarGas(id: 1, idmycar: 1, cargasdate: "2025-11-09", carmilesstart: 10000, carmilesend: 10300, carmilesnet: 300, cargals: 10.349, cargasprice: 3.49)
+    let gas = AutoCarGas(id: 1, idmycar: 1, cargasdate: "2025-11-09", carmilesstart: 10000, carmilesend: 10300, carmilesnet: 300, cargals: 10.349, cargasprice: 3.29)
     let carModel = AutoCar(id: 14, userId: 1, modelYear: 2020, carMake: "Toyota", carModel: "Camry", active: true)
     GasView(gas: gas, car: carModel)
+    
 }

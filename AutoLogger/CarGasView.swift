@@ -27,6 +27,9 @@ struct CarGasView: View {
         .onAppear {
             viewModel.fetchCarGasItems(id: car.id)
         }
+        .refreshable {
+            viewModel.fetchCarGasItems(id: car.id)
+        }
 //        .sheet(isPresented: $viewModel.isShowingDetails) {
 //            GasView(gas: viewModel.selectedCarGas!, car: car)
 //        }
@@ -48,4 +51,5 @@ struct CarGasView: View {
 #Preview {
     let carModel = AutoCar(id: 14, userId: 1, modelYear: 2020, carMake: "Toyota", carModel: "Camry", active: true)
     CarGasView(car: carModel)
+        .environmentObject(MyViewModel())
 }

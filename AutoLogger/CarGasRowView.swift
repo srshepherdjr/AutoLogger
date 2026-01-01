@@ -59,4 +59,5 @@ struct CarGasRowView: View {
     let gas = AutoCarGas(id: 14, idmycar: 1, cargasdate: "2025-11-08", carmilesstart: Int(10.00), carmilesend: Int(3.50), carmilesnet: 1000, cargals: 1300, cargasprice: 300)
     let selectedCar = AutoCar(id: 1, userId: 1, modelYear: 2020, carMake: "Corolla", carModel: "Toyota", active: true)
     CarGasRowView(item: gas, selectedCar: selectedCar)
+        .environmentObject(MyViewModel())
 }
